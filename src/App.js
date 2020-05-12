@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom' ;
+// import DeathRow from './containers/DeathRow'
+import Login from './components/Login'
+import CreateUser from './components/CreateUser'
+import JoinGame from './components/JoinGame'
+import HostGame from './components/HostGame'
+import NavBar from './components/NavBar'
 import './App.css';
 
 function App() {
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar/>
+      <Switch>
+        {/* <Route path='/' component={NavBar}/> */}
+        <Route path='/login' component={Login}/>
+        <Route path='/create-account' component={CreateUser}/>
+        <Route path='/join-game' component={JoinGame}/>
+        <Route path='/host-game' component={HostGame}/>
+
+      {/* < DeathRow /> */}
+      </Switch>
     </div>
+    </BrowserRouter>
   );
 }
 
