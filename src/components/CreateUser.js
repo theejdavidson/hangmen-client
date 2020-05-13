@@ -25,7 +25,12 @@ class CreateUser extends React.Component {
           headers: {
             'Content-Type': 'application/json' 
           },
-          body: JSON.stringify(this.state)
+          body: JSON.stringify({
+              user: {
+                  username: this.state.username,
+                  password: this.state.password
+                }
+            })
         }
     
     

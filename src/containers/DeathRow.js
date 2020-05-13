@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import Player from './Player';
+import { ActionCable } from 'react-actioncable-provider';
+import { API_ROOT } from '../constants/index';
+// import Player from './Player';
+import Cable from './Cable';
 
-export default class DeathRow extends Component {
+class DeathRow extends Component {
     constructor() {
         super()
         this.state = {
-            players: []
+            allGames: [],
+            activeGame: null
         }
     }
 
@@ -13,8 +17,10 @@ export default class DeathRow extends Component {
         return(
             <div>
                 {/* {render all players} */}
-                <Player />
+                {/* <Player /> */}
             </div>
         )
     }
 }
+
+export default DeathRow;

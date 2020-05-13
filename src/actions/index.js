@@ -1,4 +1,4 @@
-import { API_ROOT, API_WS_ROOT } from '../constants/index'
+import { API_ROOT, API_WS_ROOT, HEADERS } from '../constants/index'
 
 export const loginSuccess = user => {
     return {
@@ -34,3 +34,13 @@ export const logout = () => {
           user: user
       }
   }
+
+// export const createGame = () => {
+//     return (dispatch => {
+//         fetch(`${API_ROOT}/api/v1/games`, {
+//             method: 'POST',
+//             headers: HEADERS,
+//             body: JSON.stringify()
+//         })
+//     })
+// }
