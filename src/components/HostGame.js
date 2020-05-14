@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchCurrentUser } from '../actions/index'
 import { API_ROOT, HEADERS } from '../constants/index'
-import { ActionCableConsumer } from 'react-actioncable-provider';
-
+import PlayerConsumer from '../consumers/PlayerConsumer'
 class HostGame extends Component {
     constructor(props) {
         super(props)
@@ -55,19 +54,11 @@ class HostGame extends Component {
         return this.state.users.map(user => <li key={user.user.id}>{user.user.username}</li>)
     }
 
-    handleReceived = (message) => {
-        console.log(message)
-    }
-
     render() {
         return (
             <div>
                 <h3>Invite Key: {this.state.key}</h3>
-                <ActionCableConsumer
-                    channel='games_channel'
-                    onRecieved={this.handleReceived()}
-                    >
-                </ActionCableConsumer>
+                <PlayerConsumer />
                 <ul>
                     { (this.state.users.length > 0) ?
                     this.renderUsers()

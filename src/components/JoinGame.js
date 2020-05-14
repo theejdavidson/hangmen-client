@@ -27,16 +27,14 @@ class JoinGame extends Component {
           body: JSON.stringify(this.state)
         }
     
-        fetch(`${API_ROOT}/api/v1/login`, reqObj)
+        fetch(`${API_ROOT}/api/v1/join`, reqObj)
         .then(resp => resp.json())
         .then(data => {
           if(data.error) {
             alert(data.error)
           } else {
-            localStorage.setItem('token', data.token)
-            this.props.loginSuccess(data)
             console.log(data)
-            this.props.history.push('/join-game')
+            this.props.history.push('/death-row')
           }
         })
     }
