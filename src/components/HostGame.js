@@ -47,29 +47,32 @@ class HostGame extends Component {
                     users: this.state.users[0].user
                 }
             })
-        }).then(resp => resp.json())
-        .then(data => { 
-            console.log(data.game)
-        })
+        })//.then(resp => resp.json())
+       // .then(game => console.log(game))
     }
 
-    renderUsers = () => {
-        return this.state.users.map(user => <li key={user.user.id}>{user.user.username}</li>)
-    }
+    // renderUsers = () => {
+    //     return this.state.users.map(user => <li key={user.user.id}>{user.user.username}</li>)
+    // }
 
     render() {
         return (
             <div>
                 <h3>Invite Key: {this.state.key}</h3>
-                <PlayerConsumer inviteKey={this.state.key}/>
-                <ul>
+                {
+                (this.state.key !== '' && this.props.loggedInUser) ?
+                <PlayerConsumer inviteKey={this.state.key} userId={this.props.loggedInUser.user.id}/>
+                :
+                <h4>Generating Game</h4>
+                }
+                {/* <ul>
                     { (this.state.users.length > 0) ?
                     this.renderUsers()
                     :
                     <li>Loading</li>
                     }
 
-                </ul>
+                </ul> */}
             </div>
         )
     }
