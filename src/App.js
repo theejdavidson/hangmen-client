@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom' ;
 import { ActionCableProvider } from 'react-actioncable-provider'
-// import DeathRow from './containers/DeathRow'
 import Login from './components/Login'
 import CreateUser from './components/CreateUser'
 import JoinGame from './components/JoinGame'
@@ -22,8 +21,6 @@ function App() {
           <Route path='/create-account' component={CreateUser}/>
           <Route path='/join-game' component={JoinGame}/>
           <Route path='/host-game' component={HostGame}/>
-
-        {/* < DeathRow /> */}
         </Switch>
       </div>
       </BrowserRouter>

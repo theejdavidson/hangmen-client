@@ -21,7 +21,6 @@ class HostGame extends Component {
         if(this.props.loggedInUser && this.state.users.length < 1) {
             this.addUser(this.props.loggedInUser)
         } else if (this.props.loggedInUser && this.state.users.length === 1) {
-            console.log(this.state.users)
             this.createGame()
         }
     }
@@ -46,10 +45,10 @@ class HostGame extends Component {
             body: JSON.stringify({
                 game: {
                     key: this.state.key,
-                    users: this.state.users
+                    users: this.state.users[0].user
                 }
             })
-        }).then(resp => console.log(resp.ok))
+        })
     }
 
     renderUsers = () => {
@@ -65,8 +64,8 @@ class HostGame extends Component {
             <div>
                 <h3>Invite Key: {this.state.key}</h3>
                 <ActionCableConsumer
-                    channel='GamesChannel'
-                    onRecieved={this.handleReceived}
+                    channel='games_channel'
+                    onRecieved={this.handleReceived()}
                     >
                 </ActionCableConsumer>
                 <ul>

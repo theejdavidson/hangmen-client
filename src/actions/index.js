@@ -1,4 +1,4 @@
-import { API_ROOT, API_WS_ROOT, HEADERS } from '../constants/index'
+import { API_ROOT, HEADERS } from '../constants/index'
 
 export const loginSuccess = user => {
     return {
@@ -11,9 +11,7 @@ export const fetchCurrentUser = () => {
     return (dispatch => {
     fetch(`${API_ROOT}/api/v1/profile`, {
         method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.token}`
-        }
+        headers: HEADERS
       })
       .then(resp => resp.json())
       .then(userObj => {
