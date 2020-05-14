@@ -7,15 +7,22 @@ class PlayerConsumer extends Component {
         console.log(message)
     }
 
+    handleClick = e => {
+        e.preventDefault()
+        console.log(this.props)
+    }
+
     render() {
         return (
-            <ActionCableConsumer
-            channel={{channel: 'GamesChannel'}}
-            onRecieved={this.handleReceived}
-            >
-            </ActionCableConsumer>
-        )
-    }
+            <div>
+                <ActionCableConsumer
+                channel={{channel: 'GamesChannel', key: this.props.inviteKey}}
+                onReceived={this.handleReceived}
+                >
+                    <button onClick={this.handleClick}>Push</button>
+                </ActionCableConsumer>
+            </div>
+        )}
 }
 
 export default PlayerConsumer

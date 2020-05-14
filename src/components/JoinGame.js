@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { API_ROOT, HEADERS } from '../constants/index'
-import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class JoinGame extends Component {
     constructor(props) {

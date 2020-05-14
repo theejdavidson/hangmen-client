@@ -47,6 +47,9 @@ class HostGame extends Component {
                     users: this.state.users[0].user
                 }
             })
+        }).then(resp => resp.json())
+        .then(data => { 
+            console.log(data.game)
         })
     }
 
@@ -58,7 +61,7 @@ class HostGame extends Component {
         return (
             <div>
                 <h3>Invite Key: {this.state.key}</h3>
-                <PlayerConsumer />
+                <PlayerConsumer inviteKey={this.state.key}/>
                 <ul>
                     { (this.state.users.length > 0) ?
                     this.renderUsers()
