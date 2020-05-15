@@ -11,15 +11,16 @@ class PlayerConsumer extends Component {
     handleReceived = (message) => {
         if (message) {
             console.log(message)
-            this.setState(({players}) => ({
-                players: [...players, message.game.users]
-            }))
+            this.setState({
+                players: [message.game.users]
+            })
         }
     }
 
     renderPlayers = () => {
-        console.log(this.state.players)
+        // console.log(this.state.players)
         return  this.state.players.map(player => {
+            console.log('player: ', player)
             return <li>username: {player['username']}</li>
         })
     }
