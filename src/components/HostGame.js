@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchCurrentUser } from '../actions/index'
 import { API_ROOT, HEADERS } from '../constants/index'
 import PlayerConsumer from '../consumers/PlayerConsumer'
+import GuessWord from './GuessWord'
 class HostGame extends Component {
     constructor(props) {
         super(props)
@@ -51,28 +52,19 @@ class HostGame extends Component {
        // .then(game => console.log(game))
     }
 
-    // renderUsers = () => {
-    //     return this.state.users.map(user => <li key={user.user.id}>{user.user.username}</li>)
-    // }
-
     render() {
         return (
             <div>
                 <h3>Invite Key: {this.state.key}</h3>
                 {
                 (this.state.key !== '' && this.props.loggedInUser) ?
+                <>
                 <PlayerConsumer inviteKey={this.state.key} userId={this.props.loggedInUser.user.id}/>
+                <GuessWord inviteKey={this.state.key} userId={this.props.loggedInUser.user.id}/>
+                </>
                 :
                 <h4>Generating Game</h4>
                 }
-                {/* <ul>
-                    { (this.state.users.length > 0) ?
-                    this.renderUsers()
-                    :
-                    <li>Loading</li>
-                    }
-
-                </ul> */}
             </div>
         )
     }

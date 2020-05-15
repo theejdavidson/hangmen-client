@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { API_ROOT, HEADERS } from '../constants/index'
 import { fetchCurrentUser } from '../actions/index'
 import PlayerConsumer from '../consumers/PlayerConsumer'
+import GuessWord from './GuessWord'
 
 class JoinGame extends Component {
     constructor(props) {
@@ -43,7 +44,10 @@ class JoinGame extends Component {
             <div>
                 <h3>Join Game</h3>
                 { this.state.hasJoined ?
+                <>
                 <PlayerConsumer inviteKey={this.state.key} userId={this.props.loggedInUser.user.id}/>
+                <GuessWord inviteKey={this.state.key} userId={this.props.loggedInUser.user.id}/>
+                </>
                 :
                 <form onSubmit={this.handleSubmit}>
                     <input name={'key'} onChange={this.handleInputChange} value={this.state.key} />

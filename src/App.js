@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom' ;
-import { ActionCableProvider } from 'react-actioncable-provider'
+import { ActionCableProvider } from '@thrash-industries/react-actioncable-provider'
 import Login from './components/Login'
 import CreateUser from './components/CreateUser'
 import JoinGame from './components/JoinGame'
@@ -11,7 +11,8 @@ import './App.css';
 
 function App() {
   return (
-    <ActionCableProvider url={`${API_WS_ROOT}?token=${localStorage.getItem('token')}`} >
+    // <ActionCableProvider url={`${API_WS_ROOT}?token=${localStorage.getItem('token')}`} >
+    <ActionCableProvider url={API_WS_ROOT} >
       <BrowserRouter>
       <div className="App">
         <NavBar/>
