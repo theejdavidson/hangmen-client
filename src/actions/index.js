@@ -29,7 +29,14 @@ export const logout = () => {
   export const addedUser = user => {
       return {
           type: 'ADDED_USER',
-          user: user
+          game: user
+      }
+  }
+
+  export const setInviteKey = inviteKey => {
+      return {
+          type: 'SET_INVITE_KEY',
+          inviteKey: inviteKey
       }
   }
 
