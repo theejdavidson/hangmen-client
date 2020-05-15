@@ -39,7 +39,7 @@ class HostGame extends Component {
             headers: HEADERS,
             body: JSON.stringify({
                 game: {
-                    key: this.state.key,
+                    key: this.props.game.inviteKey,
                     users: this.props.loggedInUser.user
                 }
             })

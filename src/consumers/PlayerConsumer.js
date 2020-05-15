@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { ActionCableConsumer } from '@thrash-industries/react-actioncable-provider';
 import { API_ROOT, HEADERS } from '../constants/index'
+import { connect } from 'react-redux'
 
 class PlayerConsumer extends Component {
 
     state = {
-        players: []
+        gameState: null
     }
 
     handleReceived = (message) => {
         if (message) {
             console.log(message)
             this.setState({
-                players: [message.game.users]
+                players: message
             })
         }
     }
 
     renderPlayers = () => {
-        // console.log(this.state.players)
+        console.log('player consumer state:', this.state)
         return  this.state.players.map(player => {
             console.log('player: ', player)
             return <li>username: {player['username']}</li>
@@ -33,10 +34,17 @@ class PlayerConsumer extends Component {
                 onConnected={this.handleReceived}
                 >
                 <ul>
-                    {(this.state.players.length > 0) ? this.renderPlayers() : <li>waiting for players to join</li>}
+                    {(this.state.gameState) ? this.renderPlayers() : <li>waiting for players to join</li>}
                 </ul>
                 </ActionCableConsumer>
         )}
 }
 
-export default PlayerConsumer
+const mapStateToProps = state => {
+    return {
+        userId: state.loggedInUser.user.id,
+        inviteKey: state.game.inviteKey
+    }
+}
+
+export default connect(mapStateToProps)(PlayerConsumer)

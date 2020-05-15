@@ -16,7 +16,7 @@ class GuessWord extends Component {
             headers: HEADERS,
             body: JSON.stringify({
                 invite_key: this.props.game.inviteKey,
-                user_id: this.props.loggedInUser.user.userId,
+                user_id: this.props.userId,
                 guess_word: this.state.guess_word
             })
         })

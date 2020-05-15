@@ -44,7 +44,7 @@ class JoinGame extends Component {
             <div>
                 <h3>Join Game</h3>
                 { this.state.hasJoined ?
-                <GuessWord inviteKey={this.state.key} userId={this.props.loggedInUser.user.id}/>
+                <GuessWord userId={this.props.loggedInUser.user.id}/>
                 :
                 <form onSubmit={this.handleSubmit}>
                     <input name={'key'} onChange={this.handleInputChange} value={this.state.key} />
