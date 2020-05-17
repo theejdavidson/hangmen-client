@@ -9,30 +9,42 @@ class PlayerConsumer extends Component {
         gameState: null
     }
 
-    handleReceived = (message) => {
+    handleConnected = (message) => {
+        console.log("on connected:", message)
         if (message) {
-            console.log(message)
             this.setState({
-                players: message
+                gameState: message
+            })
+        }
+    }
+
+    handleReceived = (message) => {
+        console.log("on received:", message)
+        if (message) {
+            this.setState({
+                gameState: message
             })
         }
     }
 
     renderPlayers = () => {
         console.log('player consumer state:', this.state)
-        return  this.state.players.map(player => {
+        return  this.state.gameState.game.users.map(player => {
             console.log('player: ', player)
-            return <li>username: {player['username']}</li>
+            return <li key={player['id']}>username: {player['username']}</li>
         })
     }
 
     render() {
+        console.log('PlayerConsumer: render', this.state)
+        let mystate = `${JSON.stringify(this.state.gameState, null, 2)}\n${this.props.inviteKey}`
         return (
                 <ActionCableConsumer
                 channel={{channel: 'GamesChannel', key: this.props.inviteKey}}
                 onReceived={this.handleReceived}
-                onConnected={this.handleReceived}
+                onConnected={this.handleConnected}
                 >
+                    <h3>{mystate}</h3>
                 <ul>
                     {(this.state.gameState) ? this.renderPlayers() : <li>waiting for players to join</li>}
                 </ul>

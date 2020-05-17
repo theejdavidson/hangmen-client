@@ -40,6 +40,8 @@ class JoinGame extends Component {
     }
 
     render() {
+        console.log('JoinGame: render', this.state)
+
         return (
             <div>
                 <h3>Join Game</h3>
