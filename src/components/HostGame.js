@@ -4,29 +4,16 @@ import { fetchCurrentUser, setInviteKey } from '../actions/index'
 import { API_ROOT, HEADERS } from '../constants/index'
 import GuessWord from './GuessWord'
 class HostGame extends Component {
-    constructor() {
-        super()
-        this.state = {
-        users: [],
-        }
-    }
 
     componentDidMount() {
         this.generateKey()
     }
 
     componentDidUpdate() {
-        if(this.props.loggedInUser) {
-            // this.addUser(this.props.loggedInUser)
+        if(this.props.loggedInUser && this.props.game.inviteKey !== '') {
             this.createGame()
         }
     }
-
-    // addUser = (user) => {
-    //     this.setState(({users}) => ({
-    //         users: [...users, user]
-    //     }))
-    // }
 
     generateKey = () => {
         const key = Math.random().toString(36).substring(2)

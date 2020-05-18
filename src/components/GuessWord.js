@@ -32,7 +32,7 @@ class GuessWord extends Component {
         return(
             <div>
                 <input name={'guess_word'} onChange={this.handleInputChange} value={this.state.guess_word}/>
-                <button onClick={this.updateGuessWord}>Ready!</button>
+                <button onClick={this.updateGuessWord}>Submit Hidden Word</button>
             </div>
         )
     }

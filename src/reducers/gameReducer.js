@@ -1,16 +1,14 @@
 const initialGameState = {
         inviteKey: '',
-        players: [],
+        gameState: null
 }
 
 export default function gameReducer(state=initialGameState, action) {
     switch(action.type) {
-        case 'ADDED_PLAYER':
-            return state//action.user
-        case 'REMOVED_PLAYER':
-            return state//action.user
         case 'SET_INVITE_KEY':
             return {...state, inviteKey: action.inviteKey }
+        case 'SET_GAME_STATE':
+            return {...state, gameState: action.gameState}
         default:
             return state;
     }
