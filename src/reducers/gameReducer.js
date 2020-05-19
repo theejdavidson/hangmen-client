@@ -10,6 +10,6 @@ export default function gameReducer(state=initialGameState, action) {
         case 'SET_GAME_STATE':
             return {...state, gameState: action.gameState}
         default:
-            return state;
+            return {...state};
     }
 }

@@ -5,13 +5,18 @@ import { API_ROOT, HEADERS } from '../constants/index'
 import GuessWord from './GuessWord'
 class HostGame extends Component {
 
+    state = {
+        gameCreated: false
+    }
+
     componentDidMount() {
         this.generateKey()
     }
 
     componentDidUpdate() {
-        if(this.props.loggedInUser && this.props.game.inviteKey !== '') {
+        if(this.props.loggedInUser && this.props.game.inviteKey !== '' && !this.state.gameCreated) {
             this.createGame()
+            this.setState({gameCreated: true})
         }
     }
 

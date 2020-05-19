@@ -29,8 +29,6 @@ class PlayerConsumer extends Component {
     // }
 
     render() {
-        console.log('PlayerConsumer: render', this.state)
-        console.log('props passed to playerConsumer at render: ', this.props)
         let storestate = `${JSON.stringify(this.props.gameState, null, 2)}\n${this.props.inviteKey}`
         return (
                 <ActionCableConsumer
