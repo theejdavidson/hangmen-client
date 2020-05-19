@@ -1,41 +1,61 @@
 import React, { Component } from 'react';
 import { ActionCableConsumer } from '@thrash-industries/react-actioncable-provider';
 import { API_ROOT, HEADERS } from '../constants/index'
+import { connect } from 'react-redux'
+import { setGameState } from '../actions/index'
 
 class PlayerConsumer extends Component {
 
-    state = {
-        players: []
-    }
-
-    handleReceived = (message) => {
+    handleConnected = (message) => {
+        console.log("on connected:", message)
         if (message) {
-            console.log(message)
-            this.setState(({players}) => ({
-                players: [...players, message.game.users]
-            }))
+            this.props.setGameState(message)
         }
     }
 
-    renderPlayers = () => {
-        console.log(this.state.players)
-        return  this.state.players.map(player => {
-            return <li>username: {player['username']}</li>
-        })
+    handleReceived = (message) => {
+        console.log("on received:", message)
+        if (message) {
+            this.props.setGameState(message)
+        }
     }
 
+    // renderPlayers = () => {
+    //     console.log('player consumer state:', this.state)
+    //     return  this.state.gameState.game.users.map(player => {
+    //         console.log('player: ', player)
+    //         return <li key={player['id']}>username: {player['username']}</li>
+    //     })
+    // }
+
     render() {
+        let storestate = `${JSON.stringify(this.props.gameState, null, 2)}\n${this.props.inviteKey}`
         return (
                 <ActionCableConsumer
                 channel={{channel: 'GamesChannel', key: this.props.inviteKey}}
                 onReceived={this.handleReceived}
-                onConnected={this.handleReceived}
+                onConnected={this.handleConnected}
                 >
+                    <h3>store state: {storestate}</h3>
                 <ul>
-                    {(this.state.players.length > 0) ? this.renderPlayers() : <li>waiting for players to join</li>}
+                    {/* {(this.state.gameState) ? this.renderPlayers() : <li>waiting for players to join</li>} */}
                 </ul>
                 </ActionCableConsumer>
         )}
 }
 
-export default PlayerConsumer
+const mapStateToProps = state => {
+    return {
+        userId: state.loggedInUser.user.id,
+        inviteKey: state.game.inviteKey,
+        gameState: state.game.gameState
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setGameState: (gameState) => dispatch(setGameState(gameState))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerConsumer)

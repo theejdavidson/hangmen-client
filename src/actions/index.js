@@ -15,7 +15,11 @@ export const fetchCurrentUser = () => {
       })
       .then(resp => resp.json())
       .then(userObj => {
-          dispatch({ type: 'CURRENT_USER', userObj})
+        if(userObj.message) {
+            return null
+        } else {
+            dispatch({ type: 'CURRENT_USER', userObj})
+        }
       })
     })
 }
@@ -29,7 +33,21 @@ export const logout = () => {
   export const addedUser = user => {
       return {
           type: 'ADDED_USER',
-          user: user
+          game: user
+      }
+  }
+
+  export const setInviteKey = inviteKey => {
+      return {
+          type: 'SET_INVITE_KEY',
+          inviteKey: inviteKey
+      }
+  }
+
+  export const setGameState = gameState => {
+      return {
+          type: 'SET_GAME_STATE',
+          gameState: gameState
       }
   }
 

@@ -4,7 +4,7 @@ import gameReducer from './gameReducer';
 
 const rootReducer = combineReducers({
     loggedInUser: loginReducer,
-    gameReducer: gameReducer,
+    game: gameReducer,
 })
 
 export default rootReducer

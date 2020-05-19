@@ -22,6 +22,9 @@ class NavBar extends Component {
                     <LinkContainer to="/join-game">
                         <Nav.Link>Join Game</Nav.Link>
                     </LinkContainer>
+                    <LinkContainer to="/host-game">
+                        <Nav.Link>Host Game</Nav.Link>
+                    </LinkContainer>
                     <LinkContainer  to="/login" onClick={this.logoutUser}>
                         <Nav.Link>Log out</Nav.Link>
                     </LinkContainer>

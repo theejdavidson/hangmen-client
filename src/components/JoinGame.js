@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { API_ROOT, HEADERS } from '../constants/index'
-import { fetchCurrentUser } from '../actions/index'
+import { fetchCurrentUser, setInviteKey } from '../actions/index'
 import PlayerConsumer from '../consumers/PlayerConsumer'
 import GuessWord from './GuessWord'
 
@@ -10,7 +10,6 @@ class JoinGame extends Component {
         super(props)
         this.state = {
             key: '',
-            // user: props.loggedInUser.user,
             hasJoined: false
         }
     }
@@ -34,20 +33,20 @@ class JoinGame extends Component {
         fetch(`${API_ROOT}/api/v1/join`, reqObj)
         .then(resp => {
             if(resp.ok) {
+                this.props.setInviteKey(this.state.key)
                 this.setState({ hasJoined: true })
             }
             })
     }
 
     render() {
+        console.log('JoinGame: render', this.state)
+
         return (
             <div>
                 <h3>Join Game</h3>
                 { this.state.hasJoined ?
-                <>
-                <PlayerConsumer inviteKey={this.state.key} userId={this.props.loggedInUser.user.id}/>
-                <GuessWord inviteKey={this.state.key} userId={this.props.loggedInUser.user.id}/>
-                </>
+                <GuessWord userId={this.props.loggedInUser.user.id}/>
                 :
                 <form onSubmit={this.handleSubmit}>
                     <input name={'key'} onChange={this.handleInputChange} value={this.state.key} />
@@ -65,4 +64,12 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchCurrentUser })(JoinGame)
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+        setInviteKey: (inviteKey) => dispatch(setInviteKey(inviteKey))
+        // createGame: () => dispatch(createGame())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(JoinGame)

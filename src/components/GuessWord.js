@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { API_ROOT, HEADERS } from '../constants/index'
+import { connect } from 'react-redux'
 
 class GuessWord extends Component {
     state = {
@@ -14,7 +15,7 @@ class GuessWord extends Component {
             method: 'PATCH',
             headers: HEADERS,
             body: JSON.stringify({
-                invite_key: this.props.inviteKey,
+                invite_key: this.props.game.inviteKey,
                 user_id: this.props.userId,
                 guess_word: this.state.guess_word
             })
@@ -31,10 +32,17 @@ class GuessWord extends Component {
         return(
             <div>
                 <input name={'guess_word'} onChange={this.handleInputChange} value={this.state.guess_word}/>
-                <button onClick={this.updateGuessWord}>Ready!</button>
+                <button onClick={this.updateGuessWord}>Submit Hidden Word</button>
             </div>
         )
     }
 }
 
-export default GuessWord
+const mapStateToProps = state => {
+    return {
+        loggedInUser: state.loggedInUser,
+        game: state.game
+    }
+}
+
+export default connect(mapStateToProps)(GuessWord)
