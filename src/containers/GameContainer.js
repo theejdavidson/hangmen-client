@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PlayerContainer from './PlayerContainer'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 
 class GameContainer extends Component {
@@ -10,14 +11,16 @@ class GameContainer extends Component {
         return this.props.gameState.game.users.map(user => {
             const gameUser = this.props.gameState.game.game_users.find(gameUser => gameUser.user_id === user.id)
             const gameUserState = {guessWord: gameUser.guess_word, limbs: gameUser.limbs}
-            return <PlayerContainer username={user.username} gameUserState={gameUserState}/>
+            return <Col><PlayerContainer username={user.username} gameUserState={gameUserState}/></Col>
         })
     }
 
     render() {
         return(
-            <Container fluid='true'>
+            <Container fluid>
+                <Row>
                 { this.renderPlayerComponents() }
+                </Row>
             </Container>
         )
     }
