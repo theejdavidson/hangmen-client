@@ -30,33 +30,24 @@ export const logout = () => {
     }
 }
 
-  export const addedUser = user => {
-      return {
-          type: 'ADDED_USER',
-          game: user
-      }
-  }
-
   export const setInviteKey = inviteKey => {
+    localStorage.setItem('inviteKey', inviteKey)
       return {
           type: 'SET_INVITE_KEY',
           inviteKey: inviteKey
       }
   }
 
-  export const setGameState = gameState => {
+  export const setGuessWord = guessWord => {
       return {
-          type: 'SET_GAME_STATE',
-          gameState: gameState
+          type: 'SET_GUESS_WORD',
+          guessWord: guessWord
       }
   }
 
-// export const createGame = () => {
-//     return (dispatch => {
-//         fetch(`${API_ROOT}/api/v1/games`, {
-//             method: 'POST',
-//             headers: HEADERS,
-//             body: JSON.stringify()
-//         })
-//     })
-// }
+  export const setGameState = gameState => {
+      return {
+          type: 'SET_GAME_STATE',
+          gameState: gameState.game
+      }
+  }

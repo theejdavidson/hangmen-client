@@ -8,8 +8,8 @@ import Col from 'react-bootstrap/Col'
 
 class GameContainer extends Component {
     renderPlayerComponents = () => {
-        return this.props.gameState.game.users.map(user => {
-            const gameUser = this.props.gameState.game.game_users.find(gameUser => gameUser.user_id === user.id)
+        return this.props.gameState.users.map(user => {
+            const gameUser = this.props.gameState.game_users.find(gameUser => gameUser.user_id === user.id)
             const gameUserState = {guessWord: gameUser.guess_word, limbs: gameUser.limbs}
             return <Col><PlayerContainer username={user.username} gameUserState={gameUserState}/></Col>
         })
@@ -19,7 +19,7 @@ class GameContainer extends Component {
         return(
             <Container fluid>
                 <Row>
-                { this.renderPlayerComponents() }
+                { (this.props.gameState && this.props.gameState.game_users) ? this.renderPlayerComponents() : <h1>Waiting for Host to start game</h1>}
                 </Row>
             </Container>
         )

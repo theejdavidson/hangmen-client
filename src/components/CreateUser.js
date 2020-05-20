@@ -42,7 +42,6 @@ class CreateUser extends React.Component {
           } else {
             localStorage.setItem('token', data.token)
             this.props.loginSuccess(data)
-            console.log(data)
             this.props.history.push('/join-game')
           }
         })

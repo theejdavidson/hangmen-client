@@ -60,16 +60,7 @@ class PlayerContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            guessWordMap: []
-        }
-    }
-
-    componentDidUpdate() {
-        if(this.state.guessWordMap.length === 0 && this.props.gameUserState.guessWord !== '') {
-            console.log('update hit')
-            this.setState({
-                guessWordMap: this.guessWordMap()
-            })
+            guessWordMap: this.guessWordMap()
         }
     }
 
@@ -97,7 +88,6 @@ class PlayerContainer extends Component {
             if(l.letter === letter && l.guessed === false) {
                 hit = true
                 updatedGuessWordMap[i].guessed = true
-                // this.setState(({guessWordMap}) => ({...guessWordMap}))
             }
         })
 

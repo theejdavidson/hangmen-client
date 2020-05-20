@@ -29,14 +29,14 @@ class PlayerConsumer extends Component {
     // }
 
     render() {
-        let storestate = `${JSON.stringify(this.props.gameState, null, 2)}\n${this.props.inviteKey}`
+        // let storestate = `${JSON.stringify(this.props.gameState, null, 2)}\n${this.props.inviteKey}`
         return (
                 <ActionCableConsumer
-                channel={{channel: 'GamesChannel', key: this.props.inviteKey}}
+                channel={{channel: 'GamesChannel', key: localStorage.inviteKey}}
                 onReceived={this.handleReceived}
                 onConnected={this.handleConnected}
                 >
-                    <h3>store state: {storestate}</h3>
+                    {/* <h3>store state: {storestate}</h3> */}
                 <ul>
                     {/* {(this.state.gameState) ? this.renderPlayers() : <li>waiting for players to join</li>} */}
                 </ul>

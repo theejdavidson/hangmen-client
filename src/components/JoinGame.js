@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { API_ROOT, HEADERS } from '../constants/index'
-import { fetchCurrentUser, setInviteKey } from '../actions/index'
+import { fetchCurrentUser, setInviteKey, setGuessWord } from '../actions/index'
 import PlayerConsumer from '../consumers/PlayerConsumer'
 import GuessWord from './GuessWord'
 
@@ -10,7 +10,7 @@ class JoinGame extends Component {
         super(props)
         this.state = {
             key: '',
-            hasJoined: false
+            guessWord: ''
         }
     }
 
@@ -27,14 +27,16 @@ class JoinGame extends Component {
           headers: HEADERS,
           body: JSON.stringify({
               inviteKey: this.state.key,
-              user: this.props.loggedInUser.user
+              user: this.props.loggedInUser.user,
+              guessWord: this.state.guessWord
           })
         }
         fetch(`${API_ROOT}/api/v1/join`, reqObj)
         .then(resp => {
             if(resp.ok) {
                 this.props.setInviteKey(this.state.key)
-                this.setState({ hasJoined: true })
+                this.props.setGuessWord(this.state.guessWord)
+                this.props.history.push('/gallows')
             }
             })
     }
@@ -44,15 +46,12 @@ class JoinGame extends Component {
 
         return (
             <div>
-                <h3>Join Game</h3>
-                { this.state.hasJoined ?
-                <GuessWord userId={this.props.loggedInUser.user.id}/>
-                :
+                <h1>Join Game</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <input name={'key'} onChange={this.handleInputChange} value={this.state.key} />
-                    <input type='submit' value='Join' />
+                    <input name={'key'} onChange={this.handleInputChange} value={this.state.key} placeholder='Paste Invite Key'/><br/>
+                    <input name={'guessWord'} onChange={this.handleInputChange} value={this.state.guessWord} placeholder='Enter Guess Word'/><br/>
+                    <input type='submit' value='Join Game' />
                 </form>
-                }
                 <a href='/host-game'>Host Game</a>
             </div>
         )
@@ -67,8 +66,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-        setInviteKey: (inviteKey) => dispatch(setInviteKey(inviteKey))
-        // createGame: () => dispatch(createGame())
+        setInviteKey: (inviteKey) => dispatch(setInviteKey(inviteKey)),
+        setGuessWord: (guessWord) => dispatch(setGuessWord(guessWord))
     }
 }
 

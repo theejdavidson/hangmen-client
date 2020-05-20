@@ -8,6 +8,7 @@ import { logout } from '../actions/index';
 class NavBar extends Component {
     logoutUser = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('inviteKey')
         this.props.logout()
     }
 

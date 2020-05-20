@@ -1,53 +1,60 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchCurrentUser, setInviteKey } from '../actions/index'
+import { fetchCurrentUser, setInviteKey, setGuessWord } from '../actions/index'
 import { API_ROOT, HEADERS } from '../constants/index'
 import GuessWord from './GuessWord'
 class HostGame extends Component {
 
     state = {
-        gameCreated: false
+        gameCreated: false,
+        guessWord: ''
     }
 
-    componentDidMount() {
-        this.generateKey()
-    }
+    handleInputChange = (e) => {
+        this.setState({
+          [e.target.name]: e.target.value
+        })
+      }
 
-    componentDidUpdate() {
-        if(this.props.loggedInUser && this.props.game.inviteKey !== '' && !this.state.gameCreated) {
-            this.createGame()
-            this.setState({gameCreated: true})
-        }
-    }
-
-    generateKey = () => {
-        const key = Math.random().toString(36).substring(2)
-        this.props.setInviteKey(key)
-    }
-
-    createGame = () => {
+    createGame = (e) => {
+        e.preventDefault()
+        const inviteKey = Math.random().toString(36).substring(2)
         fetch(`${API_ROOT}/api/v1/games`, {
             method: 'POST',
             headers: HEADERS,
             body: JSON.stringify({
-                game: {
-                    key: this.props.game.inviteKey,
-                    users: this.props.loggedInUser.user
-                }
+                inviteKey: inviteKey,
+                guessWord: this.state.guessWord,
+                user: this.props.loggedInUser.user
             })
-        })//.then(resp => resp.json())
-       // .then(game => console.log(game))
+        }).then(resp => {
+            console.log(resp)
+            if(resp.ok) {
+                this.props.setGuessWord(this.state.guessWord)
+                this.props.setInviteKey(inviteKey)
+                this.setState({gameCreated: true})
+            }
+            })
     }
 
     render() {
         return (
             <div>
-                <h3>Invite Key: {this.props.game.inviteKey}</h3>
-                {
-                (this.props.game.inviteKey !== '' && this.props.loggedInUser) ?
-                <GuessWord userId={this.props.loggedInUser.user.id}/>
-                :
-                <h4>Generating Game</h4>
+                <h1>Host Game</h1>
+                <form onSubmit={this.createGame}>
+                    <input name={'guessWord'} onChange={this.handleInputChange} value={this.state.guessWord} placeholder='Enter Guess Word'/><br/>
+                    <input type='submit' value='Create Game' />
+                </form>
+                {this.state.gameCreated ? 
+                <div>
+                    <h2>Game Created!</h2><br/>
+                    <h3>Share this invite key so others can join: {localStorage.inviteKey}</h3>
+                </div>
+                : null}
+
+                {(this.props.gameState && this.props.gameState.users)
+                    ? console.log('Users: ', this.props.gameState.users)
+                    : null
                 }
             </div>
         )
@@ -57,15 +64,15 @@ class HostGame extends Component {
 const mapStateToProps = state => {
     return {
         loggedInUser: state.loggedInUser,
-        game: state.game
+        gameState: state.game.gameState
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-        setInviteKey: (inviteKey) => dispatch(setInviteKey(inviteKey))
-        // createGame: () => dispatch(createGame())
+        setInviteKey: (inviteKey) => dispatch(setInviteKey(inviteKey)),
+        setGuessWord: (guessWord) => dispatch(setGuessWord(guessWord))
     }
 }
 

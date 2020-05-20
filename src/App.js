@@ -23,18 +23,15 @@ const App = (props) => {
           <Route path='/create-account' component={CreateUser}/>
           <Route path='/join-game' component={JoinGame}/>
           <Route path='/host-game' component={HostGame}/>
-          {/* <Route path='/gallows' component={GameContainer} gameState={props.gameState}/> */}
+          <Route path='/gallows' component={GameContainer}/>
         </Switch>
       </div>
       </BrowserRouter>
-      <h1>invite key: {props.inviteKey}</h1>
-      {props.loggedInUser ? <h1>user: {props.loggedInUser.user.username}</h1> : null}
 
-      {(props.loggedInUser && props.inviteKey !== '') ? 
+      {(localStorage.inviteKey && props.loggedInUser) ? 
         <PlayerConsumer/> 
       : null}
 
-      {(props.gameState && props.gameState.game.game_users.length > 0) ? <GameContainer/> : null}
     </ActionCableProvider>
   );
 }
