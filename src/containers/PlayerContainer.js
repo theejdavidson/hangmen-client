@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { ReactSVG } from 'react-svg'
+import Letterbox from '../components/Letterbox'
 
 const mapLimbsToSVG = [<ReactSVG src={process.env.PUBLIC_URL + '/diagrams/limbs_0.svg'}
 wrapper="span"
@@ -56,13 +57,58 @@ beforeInjection={svg => {
 
 class PlayerContainer extends Component {
     // make container with username, svg diagram, hidden word and letterbox
+    constructor(props) {
+        super(props)
+        this.state = {
+            guessWordMap: []
+        }
+    }
 
-    guessWordArr = () => this.props.gameUserState.guessWord.split('')
+    componentDidUpdate() {
+        if(this.state.guessWordMap.length === 0 && this.props.gameUserState.guessWord !== '') {
+            console.log('update hit')
+            this.setState({
+                guessWordMap: this.guessWordMap()
+            })
+        }
+    }
 
-    guessWordBlanked = () => this.guessWordArr().map(letter => '_ ').join('')
+    guessWordArr = () => {
+        return this.props.gameUserState.guessWord.split('')
+    }
+
+    guessWordMap = () => this.guessWordArr().map(letter => ({letter: letter, guessed: false}))
+
+    guessWordBlanked = () => {
+        return this.state.guessWordMap.map(l => {
+            if(l.guessed === true) {
+                return l.letter
+            } else {
+                return '_'
+            }
+        }).join(' ')
+    }
+
+    guessLetter = (letter) => {
+        console.log('guessed letter: ', letter)
+        const updatedGuessWordMap = [...this.state.guessWordMap]
+        let hit = false
+        updatedGuessWordMap.find((l, i) => {
+            if(l.letter === letter && l.guessed === false) {
+                hit = true
+                updatedGuessWordMap[i].guessed = true
+                // this.setState(({guessWordMap}) => ({...guessWordMap}))
+            }
+        })
+
+        if(hit) {
+            this.setState({guessWordMap: updatedGuessWordMap})
+        }
+    }
 
     render() {
-        console.log(this.props)
+        console.log('pc props: ', this.props)
+        console.log('pc state: ', this.state)
         return(
             <Container fluid>
                 <Row className="justify-content-center">{this.props.username}</Row>
@@ -70,6 +116,7 @@ class PlayerContainer extends Component {
                     {mapLimbsToSVG[this.props.gameUserState.limbs]}
                 </Row>
                 <Row className="justify-content-center">{this.guessWordBlanked()}</Row>
+                <Letterbox guessLetter={this.guessLetter}/>
             </Container>
         )
     }

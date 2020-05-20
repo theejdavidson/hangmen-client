@@ -34,7 +34,7 @@ const App = (props) => {
         <PlayerConsumer/> 
       : null}
 
-      {(props.gameState) ? <GameContainer/> : null}
+      {(props.gameState && props.gameState.game.game_users.length > 0) ? <GameContainer/> : null}
     </ActionCableProvider>
   );
 }
