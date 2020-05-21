@@ -51,3 +51,11 @@ export const logout = () => {
           gameState: gameState.game
       }
   }
+
+  export const clearGameState = () => {
+      console.log('CLEARING GAME STATE')
+    return {
+        type: 'SET_GAME_STATE',
+        gameState: null
+    }
+}

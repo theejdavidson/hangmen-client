@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { API_ROOT, HEADERS } from '../constants/index'
-import { fetchCurrentUser, setInviteKey, setGuessWord } from '../actions/index'
-import PlayerConsumer from '../consumers/PlayerConsumer'
-import GuessWord from './GuessWord'
+import { fetchCurrentUser, setInviteKey, setGuessWord, clearGameState } from '../actions/index'
+import Button from 'react-bootstrap/Button'
+// import PlayerConsumer from '../consumers/PlayerConsumer'
+// import GuessWord from './GuessWord'
 
 class JoinGame extends Component {
     constructor(props) {
         super(props)
+        props.clearGameState()
         this.state = {
             key: '',
             guessWord: ''
@@ -42,8 +44,6 @@ class JoinGame extends Component {
     }
 
     render() {
-        console.log('JoinGame: render', this.state)
-
         return (
             <div>
                 <h1>Join Game</h1>
@@ -66,6 +66,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+        clearGameState: () => dispatch(clearGameState()),
         setInviteKey: (inviteKey) => dispatch(setInviteKey(inviteKey)),
         setGuessWord: (guessWord) => dispatch(setGuessWord(guessWord))
     }

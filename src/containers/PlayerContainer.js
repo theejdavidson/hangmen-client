@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { ReactSVG } from 'react-svg'
 import Letterbox from '../components/Letterbox'
+import { API_ROOT, HEADERS } from '../constants/index'
 
 const mapLimbsToSVG = [<ReactSVG src={process.env.PUBLIC_URL + '/diagrams/limbs_0.svg'}
 wrapper="span"
@@ -93,7 +94,21 @@ class PlayerContainer extends Component {
 
         if(hit) {
             this.setState({guessWordMap: updatedGuessWordMap})
+        } else {
+            console.log('incrementing limb')
+            this.incrementLimb()
         }
+    }
+
+    incrementLimb = () => {
+    // e.preventDefault()
+        fetch(`${API_ROOT}/api/v1/increment-limb`, {
+            method: 'PATCH',
+            headers: HEADERS,
+            body: JSON.stringify({
+                gameUserId: this.props.gameUserState.gameUserId
+            })
+        })
     }
 
     render() {

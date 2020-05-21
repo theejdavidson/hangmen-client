@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchCurrentUser, setInviteKey, setGuessWord } from '../actions/index'
+import { fetchCurrentUser, setInviteKey, setGuessWord, clearGameState } from '../actions/index'
 import { API_ROOT, HEADERS } from '../constants/index'
-import GuessWord from './GuessWord'
+import Button from 'react-bootstrap/Button'
+
+// import GuessWord from './GuessWord'
 class HostGame extends Component {
 
-    state = {
-        gameCreated: false,
-        guessWord: ''
+    constructor(props) {
+        super(props)
+        props.clearGameState()
+        this.state = {
+            gameCreated: false,
+            guessWord: ''
+        }
     }
 
     handleInputChange = (e) => {
@@ -37,6 +43,10 @@ class HostGame extends Component {
             })
     }
 
+    renderUsers = () => {
+    return this.props.gameState.users.map(user => <li key={user.id}>{user.username}</li>)
+    }
+
     render() {
         return (
             <div>
@@ -53,7 +63,13 @@ class HostGame extends Component {
                 : null}
 
                 {(this.props.gameState && this.props.gameState.users)
-                    ? console.log('Users: ', this.props.gameState.users)
+                    ? <div>
+                        <h2>Joined Players</h2>
+                        <ul>
+                            {this.renderUsers()}
+                        </ul>
+                        <Button>Start Game</Button>
+                    </div>
                     : null
                 }
             </div>
@@ -71,6 +87,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+        clearGameState: () => dispatch(clearGameState()),
         setInviteKey: (inviteKey) => dispatch(setInviteKey(inviteKey)),
         setGuessWord: (guessWord) => dispatch(setGuessWord(guessWord))
     }

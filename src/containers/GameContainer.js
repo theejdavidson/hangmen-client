@@ -10,7 +10,7 @@ class GameContainer extends Component {
     renderPlayerComponents = () => {
         return this.props.gameState.users.map(user => {
             const gameUser = this.props.gameState.game_users.find(gameUser => gameUser.user_id === user.id)
-            const gameUserState = {guessWord: gameUser.guess_word, limbs: gameUser.limbs}
+            const gameUserState = {guessWord: gameUser.guess_word, limbs: gameUser.limbs, gameUserId: gameUser.id}
             return <Col><PlayerContainer username={user.username} gameUserState={gameUserState}/></Col>
         })
     }
