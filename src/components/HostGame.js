@@ -47,6 +47,10 @@ class HostGame extends Component {
     return this.props.gameState.users.map(user => <li key={user.id}>{user.username}</li>)
     }
 
+    startGame = () => {
+        this.props.history.push('/gallows')
+    }
+
     render() {
         return (
             <div>
@@ -68,7 +72,7 @@ class HostGame extends Component {
                         <ul>
                             {this.renderUsers()}
                         </ul>
-                        <Button>Start Game</Button>
+                        <Button onClick={this.startGame}>Start Game</Button>
                     </div>
                     : null
                 }

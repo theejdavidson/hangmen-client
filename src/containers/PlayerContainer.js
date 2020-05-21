@@ -9,51 +9,37 @@ import { API_ROOT, HEADERS } from '../constants/index'
 const mapLimbsToSVG = [<ReactSVG src={process.env.PUBLIC_URL + '/diagrams/limbs_0.svg'}
 wrapper="span"
 beforeInjection={svg => {
-  svg.setAttribute('style', 'width: 200px')
-  svg.setAttribute('style', 'height: 200px')
-
+    svg.setAttribute('style', 'width: 200px; height: 200px')
 }}/>,
 <ReactSVG src={process.env.PUBLIC_URL + '/diagrams/limbs_1.svg'}
     wrapper="span"
     beforeInjection={svg => {
       svg.setAttribute('style', 'width: 200px; height: 200px')
-    //   svg.setAttribute('style', 'height: 200px')
-
     }}/>,
 <ReactSVG src={process.env.PUBLIC_URL + '/diagrams/limbs_2.svg'}
 wrapper="span"
 beforeInjection={svg => {
-  svg.setAttribute('style', 'width: 200px')
-  svg.setAttribute('style', 'height: 200px')
-
+    svg.setAttribute('style', 'width: 200px; height: 200px')
 }}/>,
 <ReactSVG src={process.env.PUBLIC_URL + '/diagrams/limbs_3.svg'}
 wrapper="span"
     beforeInjection={svg => {
-      svg.setAttribute('style', 'width: 200px')
-      svg.setAttribute('style', 'height: 200px')
-
+      svg.setAttribute('style', 'width: 200px; height: 200px')
     }}/>,
 <ReactSVG src={process.env.PUBLIC_URL + '/diagrams/limbs_4.svg'}
 wrapper="span"
 beforeInjection={svg => {
-  svg.setAttribute('style', 'width: 200px')
-  svg.setAttribute('style', 'height: 200px')
-
+    svg.setAttribute('style', 'width: 200px; height: 200px')
 }}/>,
 <ReactSVG src={process.env.PUBLIC_URL + '/diagrams/limbs_5.svg'}
 wrapper="span"
     beforeInjection={svg => {
-      svg.setAttribute('style', 'width: 200px')
-      svg.setAttribute('style', 'height: 200px')
-
+      svg.setAttribute('style', 'width: 200px; height: 200px')
     }}/>,
 <ReactSVG src={process.env.PUBLIC_URL + '/diagrams/limbs_6.svg'}
 wrapper="span"
 beforeInjection={svg => {
-  svg.setAttribute('style', 'width: 200px')
-  svg.setAttribute('style', 'height: 200px')
-
+    svg.setAttribute('style', 'width: 200px; height: 200px')
 }}/>]
 
 class PlayerContainer extends Component {
@@ -101,7 +87,6 @@ class PlayerContainer extends Component {
     }
 
     incrementLimb = () => {
-    // e.preventDefault()
         fetch(`${API_ROOT}/api/v1/increment-limb`, {
             method: 'PATCH',
             headers: HEADERS,
@@ -119,9 +104,15 @@ class PlayerContainer extends Component {
                 <Row className="justify-content-center">{this.props.username}</Row>
                 <Row className="justify-content-center">
                     {mapLimbsToSVG[this.props.gameUserState.limbs]}
+                    {/* <ReactSVG src={process.env.PUBLIC_URL + '/diagrams/dynamic_limbs.svg'}
+                        wrapper="span"
+                        evalScripts="always"
+                        beforeInjection={svg => {
+                            svg.setAttribute('style', 'width: 200px; height: 200px')
+                    }}/> */}
                 </Row>
                 <Row className="justify-content-center">{this.guessWordBlanked()}</Row>
-                <Letterbox guessLetter={this.guessLetter}/>
+                <Letterbox guessLetter={this.guessLetter} gameUserId={this.props.gameUserState.gameUserId}/>
             </Container>
         )
     }
