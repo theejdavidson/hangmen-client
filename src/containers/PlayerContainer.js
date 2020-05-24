@@ -6,12 +6,6 @@ import Letterbox from '../components/Letterbox'
 import Diagram from '../components/Diagram'
 import { API_ROOT, HEADERS } from '../constants/index'
 class PlayerContainer extends Component {
-    constructor(props) {
-        super(props)
-        // this.state = {
-        //     guessWordMap: this.guessWordMap()
-        // }
-    }
 
     guessWordArr = () => {
         return this.props.targetGameUser.guess_word.split('')
@@ -20,8 +14,6 @@ class PlayerContainer extends Component {
     guessedLettersArr = () => {
         return this.props.targetGuesses.map(g => g.guess_letter)
     }
-
-    // guessWordMap = () => this.guessWordArr().map(letter => ({letter: letter, guessed: false}))
 
     guessWordBlanked = () => {
         return this.guessWordArr().map(l => {

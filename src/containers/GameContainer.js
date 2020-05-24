@@ -16,19 +16,33 @@ class GameContainer extends Component {
         })
     }
 
+    renderUsers = () => {
+    return this.props.gameState.users.map(user => <li key={`UserListItem_${user.id}`}>{user.username}</li>)
+    }
+
+    evaluateGameStatus = () => {
+        if(!this.props.gameState) {
+            return <h1>Joining Game</h1>
+        } else if (this.props.gameState.status === 'PLAYERS_JOINING') {
+            return <div>
+            <h1>Waiting for Host to start game</h1>
+            <ul>{this.renderUsers()}</ul>
+            </div>
+        } else if(this.props.gameState.status === 'IN_PROGRESS') {
+            return this.renderPlayerComponents()
+        }
+    }
+
     render() {
         return(
             <Container fluid>
-                <Row>
-                { (this.props.gameState && this.props.gameState.game_users) ? this.renderPlayerComponents() : <h1>Waiting for Host to start game</h1>}
-                </Row>
+                    {this.evaluateGameStatus()}
             </Container>
         )
     }
 }
 
 const mapStateToProps = state => {
-    // console.log(state)
     return {
         loggedInUser: state.loggedInUser,
         gameState: state.game.gameState

@@ -20,26 +20,13 @@ class PlayerConsumer extends Component {
         }
     }
 
-    // renderPlayers = () => {
-    //     console.log('player consumer state:', this.state)
-    //     return  this.state.gameState.game.users.map(player => {
-    //         console.log('player: ', player)
-    //         return <li key={player['id']}>username: {player['username']}</li>
-    //     })
-    // }
-
     render() {
-        // let storestate = `${JSON.stringify(this.props.gameState, null, 2)}\n${this.props.inviteKey}`
         return (
                 <ActionCableConsumer
                 channel={{channel: 'GamesChannel', key: localStorage.inviteKey}}
                 onReceived={this.handleReceived}
                 onConnected={this.handleConnected}
                 >
-                    {/* <h3>store state: {storestate}</h3> */}
-                <ul>
-                    {/* {(this.state.gameState) ? this.renderPlayers() : <li>waiting for players to join</li>} */}
-                </ul>
                 </ActionCableConsumer>
         )}
 }

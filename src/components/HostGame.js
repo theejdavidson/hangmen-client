@@ -49,6 +49,13 @@ class HostGame extends Component {
 
     startGame = () => {
         console.log('START GAME')
+        fetch(`${API_ROOT}/api/v1/start`, {
+            method: 'POST',
+            headers: HEADERS,
+            body: JSON.stringify({
+                gameId: this.props.gameState.id
+            })
+        })
         this.props.history.push('/gallows')
     }
 
@@ -56,16 +63,15 @@ class HostGame extends Component {
         return (
             <div>
                 <h1>Host Game</h1>
-                <form onSubmit={this.createGame}>
-                    <input name={'guessWord'} onChange={this.handleInputChange} value={this.state.guessWord} placeholder='Enter Guess Word'/><br/>
-                    <input type='submit' value='Create Game' />
-                </form>
                 {this.state.gameCreated ? 
                 <div>
                     <h2>Game Created!</h2><br/>
                     <h3>Share this invite key so others can join: {localStorage.inviteKey}</h3>
                 </div>
-                : null}
+                : <form onSubmit={this.createGame}>
+                <input name={'guessWord'} onChange={this.handleInputChange} value={this.state.guessWord} placeholder='Enter Guess Word'/><br/>
+                <input type='submit' value='Create Game' />
+                </form>}
 
                 {(this.props.gameState && this.props.gameState.users)
                     ? <div>

@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 class JoinGame extends Component {
     constructor(props) {
         super(props)
-        props.clearGameState()
+        // props.clearGameState()
         this.state = {
             key: '',
             guessWord: ''
