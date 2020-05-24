@@ -48,6 +48,7 @@ class HostGame extends Component {
     }
 
     startGame = () => {
+        console.log('START GAME')
         this.props.history.push('/gallows')
     }
 

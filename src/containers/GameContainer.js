@@ -8,10 +8,10 @@ import Col from 'react-bootstrap/Col'
 
 class GameContainer extends Component {
     renderPlayerComponents = () => {
-        return this.props.gameState.users.map(user => {
-            const gameUser = this.props.gameState.game_users.find(gameUser => gameUser.user_id === user.id)
-            const gameUserState = {guessWord: gameUser.guess_word, limbs: gameUser.limbs, gameUserId: gameUser.id}
-            return <Col><PlayerContainer username={user.username} gameUserState={gameUserState}/></Col>
+        const currentGameUser = this.props.gameState.game_users.find(currentGameUser => currentGameUser.user_id === this.props.loggedInUser.user.id)
+        return this.props.gameState.users.map(targetUser => {
+            const targetGameUser = this.props.gameState.game_users.find(targetGameUser => targetGameUser.user_id === targetUser.id)
+            return <Col key={`PlayerContainerCol_${targetGameUser.id}`}><PlayerContainer targetUsername={targetUser.username} targetGameUser={targetGameUser}/></Col>
         })
     }
 
