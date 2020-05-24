@@ -28,7 +28,7 @@ class GameContainer extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
+    // console.log(state)
     return {
         loggedInUser: state.loggedInUser,
         gameState: state.game.gameState

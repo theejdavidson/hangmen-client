@@ -1,7 +1,7 @@
 import React from "react";
 
 function Diagram(props) {
-    const { limbs } = props
+    const { limbs, tguId } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,17 +12,17 @@ function Diagram(props) {
       preserveAspectRatio="none"
     >
       <defs>
-        <path id="c12YuPG74m" d="M475.93 420H123.39"></path>
-        <path id="dDkam8NZK" d="M320 66.99H185.4V420"></path>
+        <path id={tguId + "c12YuPG74m"} d="M475.93 420H123.39"></path>
+        <path id={tguId + "dDkam8NZK"} d="M320 66.99H185.4V420"></path>
         {(limbs > 0) ? <path
-          id="aOFRxtWi7"
+          id={tguId + "aOFRxtWi7"}
           d="M359.1 127.05c0 22.52-17.52 40.8-39.1 40.8-21.58 0-39.1-18.28-39.1-40.8 0-22.52 17.52-40.8 39.1-40.8 21.58 0 39.1 18.28 39.1 40.8z"
         ></path> : null}
-        {(limbs > 1) ? <path id="a1tnXacWQ" d="M320 291.95v-124.1"></path> : null}
-        {(limbs > 2) ? <path id="a3z7eQOYxJ" d="M416.9 167.85l-96.9 37.4"></path> : null}
-        {(limbs > 3) ? <path id="b9hv6OdxZq" d="M223.1 167.85l96.9 37.4"></path> : null}
-        {(limbs > 4) ? <path id="d1k8Q6WPCG" d="M368.45 404.15L320 291.95"></path> : null}
-        {(limbs > 5) ? <path id="eZVs1Sm32" d="M271.55 404.15L320 291.95"></path> : null}
+        {(limbs > 1) ? <path id={tguId + "a1tnXacWQ"} d="M320 291.95v-124.1"></path> : null}
+        {(limbs > 2) ? <path id={tguId + "a3z7eQOYxJ"} d="M416.9 167.85l-96.9 37.4"></path> : null}
+        {(limbs > 3) ? <path id={tguId + "b9hv6OdxZq"} d="M223.1 167.85l96.9 37.4"></path> : null}
+        {(limbs > 4) ? <path id={tguId + "d1k8Q6WPCG"} d="M368.45 404.15L320 291.95"></path> : null}
+        {(limbs > 5) ? <path id={tguId + "eZVs1Sm32"} d="M271.55 404.15L320 291.95"></path> : null}
       </defs>
       <filter
         id="shadow16571543"
@@ -52,39 +52,39 @@ function Diagram(props) {
         fillOpacity="0"
         stroke="#000"
         strokeWidth="6"
-        xlinkHref="#c12YuPG74m"
+        xlinkHref={"#" + tguId + "c12YuPG74m"}
       ></use>
       <use
         fillOpacity="0"
         stroke="#000"
         strokeWidth="5"
-        xlinkHref="#dDkam8NZK"
+        xlinkHref={"#" + tguId + "dDkam8NZK"}
       ></use>
-      <use xlinkHref="#aOFRxtWi7"></use>
+      <use xlinkHref={"#" + tguId + "aOFRxtWi7"}></use>
       <use
         fillOpacity="0"
         stroke="#000"
         strokeWidth="6"
-        xlinkHref="#a1tnXacWQ"
+        xlinkHref={"#" + tguId + "a1tnXacWQ"}
       ></use>
       <use
         fillOpacity="0"
         stroke="#000"
         strokeWidth="4"
-        xlinkHref="#a3z7eQOYxJ"
+        xlinkHref={"#" + tguId + "a3z7eQOYxJ"}
       ></use>
       <use
         fillOpacity="0"
         stroke="#000"
         strokeWidth="4"
-        xlinkHref="#b9hv6OdxZq"
+        xlinkHref={"#" + tguId + "b9hv6OdxZq"}
       ></use>
       <g>
         <use
           fillOpacity="0"
           stroke="#000"
           strokeWidth="4"
-          xlinkHref="#d1k8Q6WPCG"
+          xlinkHref={"#" + tguId + "d1k8Q6WPCG"}
         ></use>
       </g>
       <g>
@@ -92,7 +92,7 @@ function Diagram(props) {
           fillOpacity="0"
           stroke="#000"
           strokeWidth="4"
-          xlinkHref="#eZVs1Sm32"
+          xlinkHref={"#" + tguId + "eZVs1Sm32"}
         ></use>
       </g>
     </svg>

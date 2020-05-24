@@ -16,7 +16,6 @@ export default class Letterbox extends Component {
                 {letters.map(l => {
                         return <Col key={`letterbox${l}Col_${this.props.gameUserId}`}>
                         <Button key={l} disabled={false} onClick={() => {
-                            // console.log()
                             this.props.guessLetter(l)
                             }}>{l}</Button>
                         </Col>
