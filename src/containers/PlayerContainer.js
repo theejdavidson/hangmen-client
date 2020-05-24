@@ -47,7 +47,7 @@ class PlayerContainer extends Component {
                     <Diagram limbs={this.props.targetGameUser.limbs} tguId={this.props.targetGameUser.id}/>
                 </Row>
                 <Row className="justify-content-center">{this.guessWordBlanked()}</Row>
-                {(this.props.targetGameUser.id !== this.props.currentGameUser.id) ? <Letterbox guessLetter={this.guessLetter} gameUserId={this.props.targetGameUser.id}/> : null}
+                {(this.props.targetGameUser.id !== this.props.currentGameUser.id) ? <Letterbox guessLetter={this.guessLetter} gameUserId={this.props.targetGameUser.id} guessedLettersArr={this.guessedLettersArr()}/> : null}
             </Container>
         )
     }

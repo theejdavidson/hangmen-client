@@ -13,9 +13,13 @@ export default class Letterbox extends Component {
 
     letterbox = () => {
        return <Row key={`letterboxRow_${this.props.gameUserId}`}>
-                {letters.map(l => {
+                {letters.map(l => { 
+                    let hasBeenGuessed = false;
+                    if(this.props.guessedLettersArr.includes(l)) {
+                        hasBeenGuessed = true;
+                    }
                         return <Col key={`letterbox${l}Col_${this.props.gameUserId}`}>
-                        <Button key={l} disabled={false} onClick={() => {
+                        <Button key={l} disabled={hasBeenGuessed} onClick={() => {
                             this.props.guessLetter(l)
                             }}>{l}</Button>
                         </Col>
