@@ -31,21 +31,16 @@ class PlayerContainer extends Component {
 
     guessLetter = (letter) => {
         console.log('guessed letter: ', letter)
-        const updatedGuessWordMap = [...this.state.guessWordMap]
-        let hit = false
-        updatedGuessWordMap.find((l, i) => {
-            if(l.letter === letter && l.guessed === false) {
-                hit = true
-                updatedGuessWordMap[i].guessed = true
-            }
+        fetch(`${API_ROOT}/api/v1/guess`, {
+            method: 'POST',
+            headers: HEADERS,
+            body: JSON.stringify({
+                guessLetter: letter,
+                guesserGameUserId: this.props.currentGameUser.id,
+                targetGameUserId: this.props.targetGameUser.id,
+                gameId: this.props.currentGameUser.game_id
+            })
         })
-
-        if(hit) {
-            this.setState({guessWordMap: updatedGuessWordMap})
-        } else {
-            console.log('incrementing limb')
-            this.incrementLimb()
-        }
     }
 
     // incrementLimb = () => {
