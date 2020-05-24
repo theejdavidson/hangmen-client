@@ -12,11 +12,11 @@ const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g',
 export default class Letterbox extends Component {
 
     letterbox = () => {
-       return <Row>
+       return <Row key={`letterboxRow_${this.props.gameUserId}`}>
                 {letters.map(l => {
-                        return <Col>
+                        return <Col key={`letterbox${l}Col_${this.props.gameUserId}`}>
                         <Button key={l} disabled={false} onClick={() => {
-                            console.log()
+                            // console.log()
                             this.props.guessLetter(l)
                             }}>{l}</Button>
                         </Col>

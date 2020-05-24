@@ -43,27 +43,15 @@ class PlayerContainer extends Component {
         })
     }
 
-    // incrementLimb = () => {
-    //     fetch(`${API_ROOT}/api/v1/increment-limb`, {
-    //         method: 'PATCH',
-    //         headers: HEADERS,
-    //         body: JSON.stringify({
-    //             gameUserId: this.props.gameUserState.gameUserId
-    //         })
-    //     })
-    // }
-
     render() {
-        console.log('pc props: ', this.props)
-        console.log('pc state: ', this.state)
         return(
             <Container fluid>
-                <Row className="justify-content-center">{this.props.username}</Row>
+                <Row className="justify-content-center">{this.props.targetUsername}</Row>
                 <Row className="justify-content-center">
                     <Diagram limbs={this.props.targetGameUser.limbs} />
                 </Row>
                 <Row className="justify-content-center">{this.guessWordBlanked()}</Row>
-                <Letterbox guessLetter={this.guessLetter} gameUserId={this.props.targetGameUser.id}/>
+                {(this.props.targetGameUser.id !== this.props.currentGameUser.id) ? <Letterbox guessLetter={this.guessLetter} gameUserId={this.props.targetGameUser.id}/> : null}
             </Container>
         )
     }

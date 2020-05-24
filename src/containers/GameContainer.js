@@ -11,7 +11,8 @@ class GameContainer extends Component {
         const currentGameUser = this.props.gameState.game_users.find(currentGameUser => currentGameUser.user_id === this.props.loggedInUser.user.id)
         return this.props.gameState.users.map(targetUser => {
             const targetGameUser = this.props.gameState.game_users.find(targetGameUser => targetGameUser.user_id === targetUser.id)
-            return <Col key={`PlayerContainerCol_${targetGameUser.id}`}><PlayerContainer targetUsername={targetUser.username} targetGameUser={targetGameUser} currentGameUser={currentGameUser}/></Col>
+            const targetGuesses = this.props.gameState.game_guesses.filter(guess => guess.target_game_user_id === targetGameUser.id)
+            return <Col key={`PlayerContainerCol_${targetGameUser.id}`}><PlayerContainer targetUsername={targetUser.username} targetGameUser={targetGameUser} currentGameUser={currentGameUser} targetGuesses={targetGuesses}/></Col>
         })
     }
 
