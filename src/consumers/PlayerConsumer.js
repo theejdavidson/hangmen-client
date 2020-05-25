@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ActionCableConsumer } from '@thrash-industries/react-actioncable-provider';
-import { API_ROOT, HEADERS } from '../constants/index'
 import { connect } from 'react-redux'
 import { setGameState } from '../actions/index'
 

@@ -46,7 +46,7 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <h3>Sign in</h3>
+                <h3>Log in</h3>
                 <form onSubmit={this.handleSubmit}>
                     <input name={'username'} onChange={this.handleInputChange} value={this.state.username} />
                     <input name={'password'} onChange={this.handleInputChange} value={this.state.password} />

@@ -9,7 +9,7 @@ class HostGame extends Component {
 
     constructor(props) {
         super(props)
-        props.clearGameState()
+        // props.clearGameState()
         this.state = {
             gameCreated: false,
             guessWord: ''

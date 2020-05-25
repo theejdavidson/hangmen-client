@@ -30,6 +30,14 @@ class GameContainer extends Component {
             </div>
         } else if(this.props.gameState.status === 'IN_PROGRESS') {
             return this.renderPlayerComponents()
+        } else if(this.props.gameState.status === 'FINISHED') {
+            const remainingGameUser = this.props.gameState.game_users.find(gameUser => gameUser.limbs < 6)
+            const winningUser = this.props.gameState.users.find(user => remainingGameUser.user_id === user.id)
+            return <div>
+                <h2>Game Finished!</h2>
+                <h2>Winner:</h2>
+                <h1>{winningUser.username}</h1>
+            </div>
         }
     }
 
