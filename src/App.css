@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.player-container {
+  border: 2px solid #282c3461;
+  background-color: #a8ecff;
+  border-radius: 15px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 10px;
+  padding: 4px;
+}
+
+.letterbox {
+  border: 2px solid 
+}

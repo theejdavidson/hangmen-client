@@ -41,14 +41,16 @@ class PlayerContainer extends Component {
 
     render() {
         return(
-            <Container fluid>
+            <Col>
+                <Container className="player-container">
                 <Row className="justify-content-center">{this.props.targetUsername}</Row>
                 <Row className="justify-content-center">
                     <Diagram limbs={this.props.targetGameUser.limbs} tguId={this.props.targetGameUser.id}/>
                 </Row>
                 <Row className="justify-content-center">{this.guessWordBlanked()}</Row>
                 {(this.props.targetGameUser.id !== this.props.currentGameUser.id && this.props.targetGameUser.limbs < 6) ? <Letterbox guessLetter={this.guessLetter} gameUserId={this.props.targetGameUser.id} guessedLettersArr={this.guessedLettersArr()}/> : null}
-            </Container>
+                </Container>
+            </Col>
         )
     }
 

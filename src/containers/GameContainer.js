@@ -43,8 +43,10 @@ class GameContainer extends Component {
 
     render() {
         return(
-            <Container fluid>
+            <Container>
+                <Row>
                     {this.evaluateGameStatus()}
+                    </Row>
             </Container>
         )
     }

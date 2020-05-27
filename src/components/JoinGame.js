@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import { API_ROOT, HEADERS } from '../constants/index'
 import { fetchCurrentUser, setInviteKey, setGuessWord, clearGameState } from '../actions/index'
 import Button from 'react-bootstrap/Button'
-// import PlayerConsumer from '../consumers/PlayerConsumer'
+import Form from 'react-bootstrap/Form'
+import Col from 'react-bootstrap/Col'
 // import GuessWord from './GuessWord'
+import {words} from '../wordlist'
 
 class JoinGame extends Component {
     constructor(props) {
@@ -43,15 +45,33 @@ class JoinGame extends Component {
             })
     }
 
+    validateWord = () => {
+        if(words.includes(this.state.guessWord.toLowerCase())) {
+            console.log('the word is valid')
+        } else {
+            console.log('the word is not valid')
+        }
+    }
+
     render() {
         return (
             <div>
                 <h1>Join Game</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <input name={'key'} onChange={this.handleInputChange} value={this.state.key} placeholder='Paste Invite Key'/><br/>
-                    <input name={'guessWord'} onChange={this.handleInputChange} value={this.state.guessWord} placeholder='Enter Guess Word'/><br/>
-                    <input type='submit' value='Join Game' />
-                </form>
+                <Form onSubmit={this.handleSubmit}>
+                        <Form.Row className="justify-content-center p-2">
+                            <Form.Label column='md' md={2}>Invite Key</Form.Label>
+                            <Col sm={4}>
+                            <Form.Control required name={'key'} onChange={this.handleInputChange} value={this.state.key} placeholder='Paste Invite Key'/>
+                            </Col>
+                        </Form.Row>
+                        <Form.Row className="justify-content-center p-2">
+                            <Form.Label column='md' md={2}>Guess Word</Form.Label>
+                            <Col sm={4}>
+                                <Form.Control required name={'guessWord'} onChange={this.handleInputChange} value={this.state.guessWord} placeholder='Enter Guess Word'/>
+                            </Col>
+                        </Form.Row>
+                    <Button type='submit'>Join Game</Button>
+                </Form>
                 <a href='/host-game'>Host Game</a>
             </div>
         )

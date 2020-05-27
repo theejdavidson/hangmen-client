@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import { fetchCurrentUser, setInviteKey, setGuessWord, clearGameState } from '../actions/index'
 import { API_ROOT, HEADERS } from '../constants/index'
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Col from 'react-bootstrap/Col'
 
-// import GuessWord from './GuessWord'
 class HostGame extends Component {
 
     constructor(props) {
         super(props)
-        // props.clearGameState()
+        props.clearGameState()
         this.state = {
             gameCreated: false,
             guessWord: ''
@@ -68,10 +69,15 @@ class HostGame extends Component {
                     <h2>Game Created!</h2><br/>
                     <h3>Share this invite key so others can join: {localStorage.inviteKey}</h3>
                 </div>
-                : <form onSubmit={this.createGame}>
-                <input name={'guessWord'} onChange={this.handleInputChange} value={this.state.guessWord} placeholder='Enter Guess Word'/><br/>
-                <input type='submit' value='Create Game' />
-                </form>}
+                : <Form onSubmit={this.createGame}>
+                    <Form.Row className="justify-content-center p-2">
+                        <Form.Label column='md' md={2}>Guess Word</Form.Label>
+                        <Col sm={4}>
+                            <Form.Control required name={'guessWord'} onChange={this.handleInputChange} value={this.state.guessWord} placeholder='Enter Guess Word'/>
+                        </Col>
+                        <Button type='submit'>Create Game</Button>
+                    </Form.Row>
+                </Form>}
 
                 {(this.props.gameState && this.props.gameState.users)
                     ? <div>

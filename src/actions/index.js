@@ -54,6 +54,7 @@ export const logout = () => {
 
   export const clearGameState = () => {
       console.log('CLEARING GAME STATE')
+      localStorage.removeItem('inviteKey')
     return {
         type: 'SET_GAME_STATE',
         gameState: null
