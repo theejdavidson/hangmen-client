@@ -11,7 +11,6 @@ import {words} from '../wordlist'
 class JoinGame extends Component {
     constructor(props) {
         super(props)
-        // props.clearGameState()
         this.state = {
             key: '',
             guessWord: ''

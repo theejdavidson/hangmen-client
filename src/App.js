@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom' ;
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { ActionCableProvider } from '@thrash-industries/react-actioncable-provider'
 import PlayerConsumer from './consumers/PlayerConsumer'
 import Login from './components/Login'
@@ -10,7 +10,11 @@ import GameContainer from './containers/GameContainer'
 import NavBar from './components/NavBar'
 import { API_WS_ROOT } from './constants/index'
 import { connect } from 'react-redux'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import './App.css';
+
+library.add(faCopy)
 
 const App = (props) => {
   return (

@@ -4,6 +4,7 @@ import PlayerContainer from './PlayerContainer'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 
 class GameContainer extends Component {
@@ -17,7 +18,7 @@ class GameContainer extends Component {
     }
 
     renderUsers = () => {
-    return this.props.gameState.users.map(user => <li key={`UserListItem_${user.id}`}>{user.username}</li>)
+    return this.props.gameState.users.map(user => <ListGroup.Item key={`UserListItem_${user.id}`}>{user.username}</ListGroup.Item>)
     }
 
     evaluateGameStatus = () => {
@@ -26,7 +27,7 @@ class GameContainer extends Component {
         } else if (this.props.gameState.status === 'PLAYERS_JOINING') {
             return <div>
             <h1>Waiting for Host to start game</h1>
-            <ul>{this.renderUsers()}</ul>
+            <ListGroup variant="flush">{this.renderUsers()}</ListGroup>
             </div>
         } else if(this.props.gameState.status === 'IN_PROGRESS') {
             return this.renderPlayerComponents()

@@ -5,12 +5,12 @@ import { API_ROOT, HEADERS } from '../constants/index'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class HostGame extends Component {
 
     constructor(props) {
         super(props)
-        props.clearGameState()
         this.state = {
             gameCreated: false,
             guessWord: ''
@@ -67,7 +67,10 @@ class HostGame extends Component {
                 {this.state.gameCreated ? 
                 <div>
                     <h2>Game Created!</h2><br/>
-                    <h3>Share this invite key so others can join: {localStorage.inviteKey}</h3>
+                    <h3>Share this invite key so others can join:</h3>
+                    <h2 id='inviteKeyToCopy'>{localStorage.inviteKey}
+                    <Button onClick={() => {navigator.clipboard.writeText(localStorage.inviteKey)}} ><FontAwesomeIcon icon="copy" /></Button>
+                    </h2>
                 </div>
                 : <Form onSubmit={this.createGame}>
                     <Form.Row className="justify-content-center p-2">

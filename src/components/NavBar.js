@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { LinkContainer } from 'react-router-bootstrap'
 import { connect } from 'react-redux'
-import { logout } from '../actions/index';
+import { logout, clearGameState } from '../actions/index';
 
 class NavBar extends Component {
     logoutUser = () => {
@@ -21,10 +21,10 @@ class NavBar extends Component {
                     {this.props.loggedInUser ?
                     <>
                     <Navbar.Text>{this.props.loggedInUser.user.username}</Navbar.Text>
-                    <LinkContainer to="/join-game">
-                        <Nav.Link>Join Game</Nav.Link>
+                    <LinkContainer to="/join-game" >
+                        <Nav.Link onClick={this.props.clearGameState}>Join Game</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/host-game">
+                    <LinkContainer to="/host-game" onClick={this.props.clearGameState}>
                         <Nav.Link>Host Game</Nav.Link>
                     </LinkContainer>
                     <LinkContainer  to="/login" onClick={this.logoutUser}>
@@ -55,9 +55,8 @@ const mapStateToProps = state => {
   
   const mapDispatchToProps = dispatch => {
     return {
-      logout:  () => {
-        dispatch(logout())
-      }
+      logout:  () => dispatch(logout()),
+      clearGameState: () => dispatch(clearGameState()),
     }
   }
 
