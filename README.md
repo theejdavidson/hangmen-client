@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Hangmen Client
+
+This repo holds the front-end React application for Hangmen, a multiplayer Hangman-style knockout game.
+
+# Deploying Locally
 
 ## Available Scripts
 
