@@ -2,6 +2,10 @@
 
 This repo holds the front-end React application for Hangmen, a multiplayer Hangman-style knockout game.
 
+Video overview:
+
+https://vimeo.com/437284758
+
 # Deploying Locally
 
 ## Available Scripts
